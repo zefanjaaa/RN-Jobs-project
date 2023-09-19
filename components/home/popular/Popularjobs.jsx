@@ -21,7 +21,7 @@ const Popularjobs = () => {
     num_pages: "1",
   });
 
-  console.log(data);
+  // console.log(data);
 
   const handleCardPress = (item) => {
     router.push(`/job-details/${item.job_id}`);
