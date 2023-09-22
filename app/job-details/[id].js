@@ -29,12 +29,20 @@ const JobDetails = () => {
   const params = useGlobalSearchParams();
   const router = useRouter();
 
+  const { data, error, isLoading, refetch } = useFetch("job-details", {
+    job_id: params.id,
+  });
+
   const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   const link = "https://careers.google.com/jobs/results";
 
-  const onRefresh = () => {};
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, []);
 
   const displayTabContent = () => {
     switch (activeTab) {
@@ -65,10 +73,6 @@ const JobDetails = () => {
     }
   };
 
-  const { data, error, isLoading, refetch } = useFetch("job-details", {
-    job_id: params.id,
-  });
-
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <Stack.Screen
@@ -80,7 +84,6 @@ const JobDetails = () => {
             <ScreenHeaderBtn
               iconUrl={icons.left}
               dimension="60%"
-              // handlePress={router.push("/")}
               handlePress={() => router.back()}
             />
           ),
