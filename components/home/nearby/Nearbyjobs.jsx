@@ -12,7 +12,7 @@ const Nearbyjobs = () => {
     query: "React Native Developer",
     num_pages: "1",
   });
-
+  // console.log(data);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -30,7 +30,7 @@ const Nearbyjobs = () => {
           data?.map((item) => (
             <NearbyJobCard
               item={item}
-              key={`nearby-job-${item?.job_id}`}
+              key={`nearby-job-${item.job_id}`}
               handleNavigate={() => router.push(`/job-details/${item.job_id}`)}
             />
           ))
